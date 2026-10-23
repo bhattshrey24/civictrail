@@ -15,8 +15,10 @@ actual check.
 - [x] Project docs (CLAUDE.md, FEATURES.md, docs/ai-log.md, improve.md)
 - [x] CI workflow (verify / e2e / security) + CODEOWNERS
 - [x] First green commit (lint + typecheck + unit + build + e2e all pass locally)
-- [ ] GitHub repo created, branch protection + required checks configured
-- [ ] Vercel project linked (preview + prod)
+- [x] GitHub repo (public): github.com/bhattshrey24/civictrail; **CI green** (3
+      jobs); branch protection on `main` (3 required checks, no force-push/delete);
+      secret scanning + push protection + Dependabot enabled
+- [ ] Vercel project linked (preview + prod) — needs owner's Vercel account
 
 **Acceptance:** `pnpm lint && pnpm typecheck && pnpm test && pnpm build` all pass;
 E2E smoke test passes; hooks demonstrably block the right things.

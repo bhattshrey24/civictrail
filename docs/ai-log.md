@@ -5,6 +5,28 @@ action. Newest first.
 
 ---
 
+## 2026-10-23 — GitHub + CI live
+
+- Repo created (public): **github.com/bhattshrey24/civictrail**; 6+ commits pushed.
+- First CI run failed → two real issues fixed:
+  1. `tsc` failed on `LayoutProps` (a Next-generated global that only exists after
+     a build; CI typechecks before building). Fixed by using an explicit props
+     type in `layout.tsx` — typecheck now passes standalone.
+  2. gitleaks-action failed on the initial push (`rootCommit^` is not a valid
+     revision). Replaced with a direct `gitleaks dir` scan of the working tree.
+     Also: `pnpm audit` gate scoped to `--prod` (the 3 high + 3 critical advisories
+     are all dev-only `vite` via vitest; production tree is clean). Full audit kept
+     as informational.
+- **CI now green** (Lint/types/unit/build · Playwright E2E · Secret & dependency
+  scan). Branch protection on `main`: 3 required checks (strict), no force-push/
+  delete, PRs required (0 approvals, solo). Secret scanning + push protection +
+  Dependabot enabled.
+- Tradeoffs documented in improve.md (enforce_admins / code-owner reviews off for
+  solo velocity). **Next:** Vercel (needs owner account), or continue features
+  (map / seed expansion / Phase 5).
+
+---
+
 ## 2026-10-23 — Phase 3: discovery UI (and much of Phase 4)
 
 ### Built & verified

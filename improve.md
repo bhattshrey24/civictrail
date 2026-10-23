@@ -4,12 +4,15 @@ Prioritized by impact × risk. Not all of this is MVP-necessary; it's a backlog.
 
 ## High
 
-- **Real test/guardrail enforcement.** The local protected-paths hook is advisory
-  and bypassable. Enable GitHub branch protection on `main` (required CI checks,
-  require PR review, require Code Owners review) and set a real username in
-  `.github/CODEOWNERS` (currently `@OWNER`). (Owner action — needs GitHub repo.)
-- **Secrets hygiene in CI.** Enable GitHub secret scanning + push protection on the
-  repo. gitleaks runs in CI but push protection is the stronger gate.
+- **Tighten test/guardrail enforcement.** Branch protection on `main` is live
+  (3 required CI checks, strict, no force-push/delete). It is NOT yet maximal:
+  `enforce_admins: false` (owner can push directly) and `require_code_owner_reviews:
+false` (solo repo — nobody to approve). When a second reviewer exists, set
+  `enforce_admins: true` and enable Code Owner reviews so changes to
+  `e2e/acceptance/**`, `tests/acceptance/**`, `.claude/hooks/**`, `.github/**`
+  genuinely require independent review. CODEOWNERS already lists them.
+- **Secrets hygiene — done.** Secret scanning, push protection, and Dependabot
+  alerts + security updates are enabled on the repo; gitleaks runs in CI.
 
 ## Medium
 
