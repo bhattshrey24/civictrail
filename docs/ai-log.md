@@ -5,6 +5,53 @@ action. Newest first.
 
 ---
 
+## 2026-10-23 — Phase 2: ward selection, sources & data model
+
+### Ward chosen: Vikaspuri (Assembly Constituency AC-31), West Delhi
+
+Selected after a data-availability spike for having (a) multiple ward-level public
+works with cost/timeline from the official e-procurement data, (b) a clean,
+sourced responsibility chain, and (c) built-in overlapping-jurisdiction examples.
+
+Key sourced facts curated into the seed:
+
+- MLA Vikaspuri (AC-31): **Pankaj Kumar Singh (BJP)**, won 2025, defeated Mahinder
+  Yadav (AAP, MLA 2014–2025 — kept as a time-ended record to show officeholder
+  change).
+- MP West Delhi: **Kamaljeet Sehrawat (BJP)**, 2024.
+- Agencies with verified official sites: MCD (mcdonline.nic.in), PWD
+  (pwddelhi.gov.in), DJB (delhijalboard.delhi.gov.in), I&FC (ifc.delhi.gov.in).
+- Issues: D K Road reconstruction (NIT 01, ₹64.66 lakh, 180 days); dark-spot LED
+  lighting (NIT 06, ₹45.0 lakh); an explicitly **unclear** drain-ownership case.
+- Councillor deliberately **omitted** — name not yet verified against the Delhi
+  State Election Commission record (incomplete chain is valid).
+
+### Built & verified locally
+
+- `src/lib/domain/schema.ts` — Zod contract encoding the evidence rules
+  (confidence enum, basis enum, time-bounded officials/reps, evidence requires a
+  source + verified_at, a `verified` claim must cite evidence).
+- `src/lib/domain/validate.ts` — referential integrity + "direct/oversight/
+  political responsibility must cite evidence (constituency alone ≠ control)".
+- `src/data/vikaspuri.ts` — the curated, fully-sourced seed.
+- `supabase/migrations/0001_init.sql` — mirrors the schema; RLS = anon read-only;
+  deferred trigger enforces the responsibility-evidence rule at the DB too.
+- `src/lib/data/repository.ts` — the single data-access seam the UI will use.
+- Tests: 15 green (provenance, dataset data-quality incl. negative cases,
+  repository). typecheck / lint / build green.
+
+### Open issues / next action
+
+- Migration + RLS are **authored but unapplied** (no Docker/Postgres locally; needs
+  the owner's Supabase account). DB-side acceptance (apply + anon-write-denied)
+  is pending that.
+- Seed has 3 issues; expand toward ~10–15.
+- Ward boundary GeoJSON (OpenCity KML → GeoJSON) moved to Phase 3 (map).
+- **Next action:** begin Phase 3 (discovery UI: search + list + map) against the
+  repository seam, OR expand the seed to ~10–15 issues first. Awaiting owner steer.
+
+---
+
 ## 2026-10-23 — Phase 1: setup & guardrails
 
 ### Environment findings (verified)

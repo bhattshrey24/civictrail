@@ -23,16 +23,26 @@ E2E smoke test passes; hooks demonstrably block the right things.
 
 ## Phase 2 — Ward selection, sources & data model
 
-- [ ] Timeboxed data-availability spike across 2–3 candidate wards; pick richest
-- [ ] Load ward boundary GeoJSON (OpenCity 2022 MCD delimitation)
-- [ ] Zod schemas + Postgres schema (issue → asset → agency → office → oversight →
-      representative; evidence; responsibility with `basis`)
-- [ ] Supabase project + RLS (anon SELECT only) + seed migration
-- [ ] First ~10–15 **verified** issues with real source links
+- [x] Timeboxed data-availability spike; **chose Vikaspuri (AC-31), West Delhi**
+- [x] Zod domain schema encoding the evidence rules (`src/lib/domain/schema.ts`)
+- [x] Dataset validation: referential integrity + "constituency ≠ control" rule
+      (`src/lib/domain/validate.ts`)
+- [x] Postgres migration mirroring the schema, with RLS (anon = read-only) and an
+      evidence trigger (`supabase/migrations/0001_init.sql`) — **authored, not yet
+      applied** (no hosted DB in this env)
+- [x] Data-access layer / repository seam for the UI (`src/lib/data/repository.ts`)
+- [x] Data-quality tests (evidence rules, provenance, referential integrity)
+- [~] Curated **verified** issues with real source links — **3 issues** so far
+  (D K Road reconstruction, dark-spot lighting, unclear drain ownership);
+  expand toward ~10–15
+- [ ] Load ward boundary GeoJSON (OpenCity 2022 MCD KML → GeoJSON) — moved to
+      Phase 3 (needed for the map)
+- [ ] Provision Supabase + apply migration + verify RLS denies anon writes
+      (blocked on owner's Supabase account)
 
-**Acceptance:** seed migration loads; every claim-bearing row has
-`source_url` + `source_date` + `verified_at`; RLS denies anon writes; data-quality
-tests pass.
+**Acceptance:** every claim-bearing row has `source_url` + `verified_at`;
+data-quality tests pass (15 tests green); typecheck/lint/build green. DB-side
+checks (migration applies, RLS denies anon writes) pending the Supabase account.
 
 ## Phase 3 — Discovery UI
 
