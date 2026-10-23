@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     "Trace which agency, officials and elected representatives are responsible for pending public works in a Delhi ward — with sources and verification dates for every claim.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
