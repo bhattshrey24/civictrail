@@ -14,7 +14,7 @@ actual check.
       verified via fixtures
 - [x] Project docs (CLAUDE.md, FEATURES.md, docs/ai-log.md, improve.md)
 - [x] CI workflow (verify / e2e / security) + CODEOWNERS
-- [ ] First green commit (lint + typecheck + unit + build + e2e all pass locally)
+- [x] First green commit (lint + typecheck + unit + build + e2e all pass locally)
 - [ ] GitHub repo created, branch protection + required checks configured
 - [ ] Vercel project linked (preview + prod)
 
