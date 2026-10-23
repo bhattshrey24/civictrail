@@ -1,10 +1,9 @@
 # Code ownership for review enforcement.
-# TODO: replace @OWNER with the real GitHub username/team before enabling
-# "Require review from Code Owners" in branch protection.
+# Enable "Require review from Code Owners" in branch protection to make this bind.
 #
 # Protected guardrail & acceptance-test paths — changes here must be reviewed,
 # this is the REAL enforcement layer (the local hook is only advisory).
-/e2e/acceptance/      @OWNER
-/tests/acceptance/    @OWNER
-/.claude/hooks/       @OWNER
-/.github/             @OWNER
+/e2e/acceptance/      @bhattshrey24
+/tests/acceptance/    @bhattshrey24
+/.claude/hooks/       @bhattshrey24
+/.github/             @bhattshrey24
