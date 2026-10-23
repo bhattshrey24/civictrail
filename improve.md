@@ -19,9 +19,13 @@ Prioritized by impact × risk. Not all of this is MVP-necessary; it's a backlog.
   access lazy/guarded so `pnpm build` doesn't require real keys (CI builds without
   secrets). Add RLS integration tests (anon cannot write; anon can only read
   published rows).
-- **Tailwind v4 + shadcn/ui compatibility.** Verify shadcn init works with
-  Tailwind v4 + Next 16 + React 19 before committing to it in Phase 3; have a
-  plain-Tailwind fallback.
+- **shadcn/ui (decided: skipped for MVP).** Building accessible Tailwind
+  components directly to avoid a Tailwind-v4/Next-16/React-19 init risk. Revisit
+  only if a component library clearly earns its keep (e.g. complex dialogs).
+- **Next 16 Cache Components (decided: off).** Disabled `cacheComponents` for
+  predictable SSG/SSR. If we later want partial prerendering / fine-grained
+  caching, re-enable it and wrap dynamic reads (`searchParams`, current time) in
+  Suspense or `"use cache"`.
 - **Data-quality test suite.** Formalize: every evidence row has a resolving
   `source_url`; no `verified` claim lacks `verified_at`; no `political` basis is
   auto-derived from constituency alone; metric formulas are unit-tested.

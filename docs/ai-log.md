@@ -5,6 +5,44 @@ action. Newest first.
 
 ---
 
+## 2026-10-23 — Phase 3: discovery UI (and much of Phase 4)
+
+### Built & verified
+
+- Design tokens (light/dark) in `globals.css`; header/footer + real metadata.
+- Pages: `/` (hero + search + known works), `/search` (results or honest empty
+  state), `/issue/[id]` (SSG; asset, project timeline, **responsibility chain**
+  with basis badges + reasoning, per-claim provenance, evidence links, and the
+  agency escalation channel).
+- Components: SearchBox, IssueCard, ProvenanceBadge (confidence + freshness),
+  EvidenceList (official vs supplementary + dates). All read through the
+  repository seam.
+- Accessibility: semantic roles (search/searchbox/headings), labels, focus-visible
+  rings, and confidence shown with text labels, not colour alone.
+- Tests: 15 unit green; **5 E2E green** incl. `e2e/acceptance/discovery.spec.ts`
+  (journey a + the issue/chain page). typecheck/lint/format/build all green.
+
+### Decisions
+
+- **Disabled Next 16 Cache Components** (`cacheComponents: false`). The scaffold
+  enabled it; it turns `searchParams` access and current-time reads into hard
+  prerender errors. For an MVP we want plain SSG/SSR, so freshness checks and
+  search are normal dynamic behaviour. Revisit if caching is ever needed.
+- **Skipped shadcn/ui**; hand-built accessible Tailwind components instead
+  (avoids a Tailwind-v4/Next-16/React-19 init risk). Documented in improve.md.
+
+### Open / next
+
+- **Map not built yet** — needs ward boundary GeoJSON (OpenCity 2022 KML →
+  GeoJSON; no gdal locally, will convert in Python or source GeoJSON) and a
+  keyless tile source (OpenFreeMap or a blank canvas). Next sub-step.
+- Seed still has 3 issues; expanding exercises more responsibility bases.
+- Owner has GitHub; Supabase/Vercel not set up (staying local).
+- **Next action:** build the ward map, or expand the seed, or push to GitHub +
+  wire CI (owner has the account). Awaiting steer.
+
+---
+
 ## 2026-10-23 — Phase 2: ward selection, sources & data model
 
 ### Ward chosen: Vikaspuri (Assembly Constituency AC-31), West Delhi

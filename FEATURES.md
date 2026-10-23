@@ -46,21 +46,30 @@ checks (migration applies, RLS denies anon writes) pending the Supabase account.
 
 ## Phase 3 — Discovery UI
 
-- [ ] shadcn/ui set up
-- [ ] Search by PIN / ward / locality
-- [ ] Map (MapLibre) + issue list for the ward
-- [ ] Loading / empty / error states; responsive; accessible
+- [x] Design tokens (light/dark palette) + header/footer + metadata
+- [x] Search by PIN / ward / locality (`/`, `/search`) with honest empty state
+- [x] Issue list + issue cards with provenance/freshness badges
+- [x] Responsive + accessible (semantic roles, labels, focus styles, colour+label)
+- [~] Loading / error states — empty state done; dedicated loading/error UIs minimal
+  (pages are static/SSR, fast)
+- [ ] Map (MapLibre) + ward boundary GeoJSON — next sub-step (keyless tiles)
+- [n/a] shadcn/ui — **deliberately skipped** for the MVP; using accessible Tailwind
+  components directly (avoids a Tailwind-v4/Next-16 init risk). Revisit if a
+  component library earns its keep.
 
-**Acceptance:** journey (a) search → results E2E passes.
+**Acceptance:** journey (a) search → results E2E passes — ✅ 5/5 E2E green.
+Note: disabled Next 16 Cache Components for predictable SSG/SSR (see ai-log).
 
-## Phase 4 — Responsibility & evidence
+## Phase 4 — Responsibility & evidence (substantially started in Phase 3)
 
-- [ ] Responsibility-chain view with basis badges (Direct/Oversight/Political/Unclear)
-- [ ] Evidence panel: source links + source date + last-verified + official flag
-- [ ] Freshness/staleness indicator (deterministic)
+- [x] Responsibility-chain view with basis badges (Direct/Oversight/Political/Unclear)
+- [x] Evidence panel: source links + source date + last-verified + official flag
+- [x] Freshness/staleness indicator (deterministic, `isStale`)
+- [ ] Polish: dedicated chain visualisation, more issues to exercise all bases
 
-**Acceptance:** journey (b) issue → chain E2E passes; data-quality tests enforce
-"no political basis derived from constituency alone".
+**Acceptance:** journey (b) issue → chain E2E passes — ✅ covered by
+`e2e/acceptance/discovery.spec.ts`; data-quality tests enforce "no direct/
+oversight/political basis without evidence (constituency alone ≠ control)".
 
 ## Phase 5 — Timelines, accountability & escalation
 
