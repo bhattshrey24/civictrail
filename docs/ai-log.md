@@ -5,6 +5,20 @@ action. Newest first.
 
 ---
 
+## 2026-10-25 — Vercel deployment live
+
+- Installed Vercel CLI; owner logged in (bhattshrey24).
+- Linked project `hackathon-fd98/civictrail`; **GitHub repo auto-connected** →
+  pushes now trigger preview (PR) + production (main) deploys.
+- **Production live & public: https://civictrail-two.vercel.app** (HTTP 200 on
+  /, /issue/[id], /search; verified serving the real app, styled, no dev
+  indicator). No env vars required (app reads the curated seed; Supabase not yet
+  wired). `.vercel/` and the generated `.env.local` are git-ignored.
+- Next: optionally restrict preview deployments / add a custom domain; wire
+  Supabase when that account exists; continue features (map / seed / Phase 5).
+
+---
+
 ## 2026-10-23 — GitHub + CI live
 
 - Repo created (public): **github.com/bhattshrey24/civictrail**; 6+ commits pushed.

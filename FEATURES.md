@@ -18,7 +18,8 @@ actual check.
 - [x] GitHub repo (public): github.com/bhattshrey24/civictrail; **CI green** (3
       jobs); branch protection on `main` (3 required checks, no force-push/delete);
       secret scanning + push protection + Dependabot enabled
-- [ ] Vercel project linked (preview + prod) — needs owner's Vercel account
+- [x] Vercel: **live in production at https://civictrail-two.vercel.app**;
+      GitHub repo connected for automatic preview (PR) + production (main) deploys
 
 **Acceptance:** `pnpm lint && pnpm typecheck && pnpm test && pnpm build` all pass;
 E2E smoke test passes; hooks demonstrably block the right things.
